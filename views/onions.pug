@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  -
+    let results = [
+      {
+        "onions_type": "Red",
+        "onions_quantity": "12 items",
+        "onions_cost": 36
+      },
+      {
+        "onions_type": "Yellow",
+        "onions_quantity": "6 items",
+        "onions_cost": 18
+      },
+      {
+        "onions_type": "white",
+        "onions_quantity": "3 items",
+        "onions_cost": 9
+      },                   
+    ]
+  div(class= "container-fluid")
+    div(class = "row")
+      each item,index in results
+        div(class= "col-sm-2", onclick=`buy(${index})`) Type: #{item.onions_type}
+        div(class= "col-sm-2", onclick=`buy(${index})`) Quantity: #{item.onions_quantity}
+        div(class= "col-sm-2", onclick=`buy(${index})`) Cost: #{item.onions_cost}
+        br
+        br
+        
+  script.
+    function buy(itemNum){
+      alert(`You purchased item ${itemNum+1}`)
+    }
