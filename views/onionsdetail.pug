@@ -1,0 +1,19 @@
+block content
+ h1= title
+ - let onionsid = toShow._id
+ - let onions_type = toShow.onions_type
+ - let onionscost = toShow.Onions_quantity
+ - let onionssize = toShow.onions_cost
+ div
+ div.row
+ div(class='onionsAttr mr-3') onions ID is:
+ div #{onionsid}
+ div.row
+ div(class='onionsAttr mr-3') onions Type is:
+ div #{onions_type}
+ div.row
+ div(class='onionsAttr mr-3') onions cost is:
+ div #{onionscost}
+ div.row
+ div(class='onionsAttr mr-3') onions size is:
+ div #{onionssize}
