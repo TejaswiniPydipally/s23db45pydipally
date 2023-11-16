@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  form(id='onionsForm', action="/resource/onions", method="POST")
+    div.form-group
+      label.onionsAttr(for='onions_type') onions onions_type
+      input#onions_type(type='text', name='onions_type' ,class="onionsAttrInput")
+    div.form-group
+      label.onionsAttr(for='Onions_quantity') onions Onions_quantity
+      input#Onions_quantity(type='text', name='Onions_quantity', class="onionsAttrInput")
+    div.form-group
+      label.onionsAttr(for='onions_cost') onions onions_cost
+      input#onions_cost(type='number', name='onions_cost', class="onionsAttrInput")
+    input(type="submit", class="onionsAttrSubmit")
+  script.
+    document.forms['onionsForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show the user tonions the form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or wonionsever the server sends
+      }).then((body) => {
+        alert("Save succeeded");
+        // TODO handle the response body
+      }).catch((error) => {
+        // TODO handle the error
+        alert("Save failed " + error);
+      });
+    });

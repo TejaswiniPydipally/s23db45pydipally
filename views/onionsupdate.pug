@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to Update
+  else
+    - let onionsid = toShow._id
+    - let onions_type = toShow.onions_type
+    - let Onions_quantity = toShow.Onions_quantity
+    - let onions_cost = toShow.onions_cost
+
+    div.row(class='mb-2 row-margin')
+      div.label-margin
+        strong ID is:
+        span #{onionsid}
+
+    - let actionid = "/resource/onions/" + onionsid
+
+    form(id='onionsForm', action=actionid, method="PUT")
+      div.form-group
+        label.onionsAttr(for='onions_type') onions_type
+        input#onions_type.form-control(type='text', name='onions_type', value=onions_type)
+
+      div.form-group
+        label.onionsAttr(for='Onions_quantity') Onions_quantity
+        input#Onions_quantity.form-control(type='text', name='Onions_quantity', value=Onions_quantity)
+
+      div.form-group
+        label.onionsAttr(for='onions_cost') onions_cost
+        input#onions_cost.form-control(type='number', name='onions_cost', value=onions_cost)
+
+      button.btn.btn-primary(type="submit") Update
+
+    script.
+      document.forms['onionsForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target))
+        }).then((resp) => {
+          return resp.json();
+        }).then((body) => {
+          alert("Update succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed: " + error);
+        });
+      });

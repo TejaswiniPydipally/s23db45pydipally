@@ -1,19 +1,25 @@
+extends layout
+
 block content
- h1= title
- - let onionsid = toShow._id
- - let onions_type = toShow.onions_type
- - let onionscost = toShow.Onions_quantity
- - let onionssize = toShow.onions_cost
- div
- div.row
- div(class='onionsAttr mr-3') onions ID is:
- div #{onionsid}
- div.row
- div(class='onionsAttr mr-3') onions Type is:
- div #{onions_type}
- div.row
- div(class='onionsAttr mr-3') onions cost is:
- div #{onionscost}
- div.row
- div(class='onionsAttr mr-3') onions size is:
- div #{onionssize}
+  h1= title
+  if (toShow == null)
+    h2 No instance to detail
+  else
+    - let onionsid = toShow._id
+    - let onions_type = toShow.onions_type
+    - let Onions_quantity = toShow.Onions_quantity
+    - let onions_cost = toShow.onions_cost
+
+    div.container
+      div.row(style='margin-bottom: 10px;')
+        div.col-md-3.onionsAttr.text-primary onions ID is:
+          div.col-md-9.text-info #{onionsid}
+      div.row(style='margin-bottom: 10px;')
+        div.col-md-3.onionsAttr.text-warning onions type is: 
+          div.col-md-9.text-success #{onions_type}  
+      div.row(style='margin-bottom: 10px;')
+        div.col-md-3.onionsAttr.text-warning onions quantity is: 
+          div.col-md-9.text-danger #{Onions_quantity}
+      div.row(style='margin-bottom: 10px;')
+        div.col-md-3.onionsAttr.text-info onions cost is:
+          div.col-md-9.text-muted #{onions_cost}

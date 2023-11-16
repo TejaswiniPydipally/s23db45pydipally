@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let onionsid = toShow._id
+    - let onions_type = toShow.onions_type
+    - let Onions_quantity = toShow.Onions_quantity
+    - let onions_cost = toShow.onions_cost
+    - let actionid = "/resource/onions/" + onionsid
+
+    script.
+      let actionid = "#{actionid}"
+
+    div
+      div.row(onions_type='margin-bottom: 10px;')
+        div(class='onionsAttr mr-3') Onions_ID is:
+        div #{onionsid}
+      div.row(onions_type='margin-bottom: 10px;')
+        div(class='onionsAttr mr-3') Onions_Type is:
+        div #{onions_type}
+      div.row(onions_type='margin-bottom: 10px;')
+        div(class='onionsAttr mr-3') Onions_quantity is:
+        div #{Onions_quantity}
+
+      div.row(onions_type='margin-bottom: 10px;')
+        div(class='onionsAttr mr-3') onions_cost is:
+        div #{onions_cost}
+      
+
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+      function cancel() {
+        // Go back to the home page for the Onions_quantityume collection
+        window.location.href='/onions'
+      }
+
+      function deleteOnid() {
+        console.log("starting delete");
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or wonionsever the server sends
+        }).then((body) => {
+          alert("Delete succeeded");
+          window.location.href='/onions';
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error);
+        });
+      }
