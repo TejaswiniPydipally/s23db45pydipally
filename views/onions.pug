@@ -20,19 +20,29 @@ block content
         "onions_cost": 9
       },                  
     ]
+  - let create = `dispatch("/desert/create")`
+    button.btn(class="btn-info", onclick=create) Add new Desert
+    <br>
   div(class= "container-fluid")
-    div(class = "row")
+    div(class = "row m-1")
       each item,index in results
+        - let destination = `dispatch("/onions/update?id=${item._id}")`
+        - let deletes = `dispatch("/onions/delete?id=${item._id}")`
+        - let detail = `dispatch("/onions/detail?id=${item._id}")`
         div(class= "col-sm-2", onclick=`buy(${index})`) type: #{item.onions_type}
         div(class= "col-sm-2", onclick=`buy(${index})`) quantity: #{item.onions_quantity}
         div(class= "col-sm-2", onclick=`buy(${index})`) cost: #{item.onions_cost}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= destination) Delete
+          button.btn( class="btn-primary ml-1", onclick= destination) Detail
         br
         br
        
   script.
-    function buy(itemNum){
-      alert(`You purchased item ${itemNum+1}`)
+    function dispatch(path){
+      window.location.href=path
     }
+    
     
  
 
